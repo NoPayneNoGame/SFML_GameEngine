@@ -5,7 +5,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML");
     
-    Player player("assets/player.png", 2);
+    Player player("assets/player.png", 1);
     player.setPosition(window.getSize().x/2, window.getSize().y/2);
 
 
@@ -23,8 +23,7 @@ int main()
             }
         }
 
-        player.handleMovement();
-        player.handleRotation();
+        player.update();
 
         window.clear(sf::Color::Blue);
         window.draw(player);

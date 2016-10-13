@@ -12,6 +12,7 @@ public:
     virtual ~Player();
     void handleMovement();
     void handleRotation();
+    void update();
 private:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
     
@@ -21,4 +22,7 @@ private:
     sf::Sprite m_sprite;
 
     Ray m_laser;
+    Ray ray1;
+    Ray ray2;
+
 };
