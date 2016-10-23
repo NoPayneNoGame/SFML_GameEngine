@@ -43,6 +43,26 @@ void Ray::setColor(sf::Color color)
     }
 }
 
+sf::Vector2f Ray::getStart()
+{
+    sf::Vector2f v;
+    v.x = m_points[0].position.x;
+    v.y = m_points[0].position.y;
+    return v;
+}
+
+sf::Vector2f Ray::getEnd()
+{
+    sf::Vector2f v;
+    v.x = m_points[1].position.x;
+    v.y = m_points[1].position.y;
+    return v;
+}
+
+sf::Color Ray::getColor()
+{
+    return m_points[0].color;
+}
 void Ray::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     states.transform *= getTransform();

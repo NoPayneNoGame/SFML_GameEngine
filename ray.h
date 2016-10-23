@@ -13,6 +13,10 @@ public:
     void setEnd(sf::Vector2f);
     void setColor(sf::Color);
 
+    sf::Vector2f getStart();
+    sf::Vector2f getEnd();
+    sf::Color getColor();
+
 private:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
     
