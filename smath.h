@@ -13,4 +13,6 @@ public:
     static double findAngle(sf::Vector2f, sf::Vector2f, bool);
     static double radToDeg(double);
     static double cross(sf::Vector2f, sf::Vector2f);
+    static double slopeOfLine(sf::Vector2f, sf::Vector2f);
+    static double atan2Angle(sf::Vector2f, sf::Vector2f);
 };

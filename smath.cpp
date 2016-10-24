@@ -35,3 +35,16 @@ double Smath::cross(sf::Vector2f u, sf::Vector2f v)
 {
     return (u.x * v.y) - (u.y * v.x);
 }
+
+double Smath::slopeOfLine(sf::Vector2f u, sf::Vector2f v)
+{
+    return (u.y - v.y) / (u.x - v.x);
+}
+
+double Smath::atan2Angle(sf::Vector2f u, sf::Vector2f v)
+{
+    float theta = atan2(u.y - v.y, u.x - v.x);
+    if(theta < 0)
+	theta += (PI * 2);
+    return radToDeg(theta);
+}

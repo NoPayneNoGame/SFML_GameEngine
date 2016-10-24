@@ -8,7 +8,6 @@ int main()
     Player player("assets/player.png", 1);
     player.setPosition(window.getSize().x/2, window.getSize().y/2);
 
-
     while(window.isOpen()) {
         sf::Event event;
         while(window.pollEvent(event))

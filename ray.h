@@ -10,7 +10,9 @@ public:
     ~Ray();
 
     void setStart(sf::Vector2f);
+    void setStart(float, float);
     void setEnd(sf::Vector2f);
+    void setEnd(float, float);
     void setColor(sf::Color);
 
     sf::Vector2f getStart();

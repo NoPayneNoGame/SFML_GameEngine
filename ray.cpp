@@ -29,10 +29,22 @@ void Ray::setStart(sf::Vector2f vec)
     m_points[0] = v;
 }
 
+void Ray::setStart(float x, float y)
+{
+    sf::Vector2f vec(x, y);
+    setStart(vec);
+}
+
 void Ray::setEnd(sf::Vector2f vec)
 {
     sf::Vertex v(vec);
     m_points[1] = v;    
+}
+
+void Ray::setEnd(float x, float y)
+{
+    sf::Vector2f vec(x, y);
+    setEnd(vec);
 }
 
 void Ray::setColor(sf::Color color)

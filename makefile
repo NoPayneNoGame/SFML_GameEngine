@@ -16,4 +16,4 @@ ray.o: ray.cpp
 	g++ -c ray.cpp
 
 clean:
-	rm app.out main.o player.o smath.o ray.o
+	rm app.out main.o player.o smath.o ray.o .*.swp 
