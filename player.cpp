@@ -17,6 +17,9 @@ Player::Player(const std::string& texture, int moveSpeed)// :
     m_shadow.setPointCount(3);
     m_shadow.setFillColor(sf::Color::Green);
 
+//    m_bullet.setTexture("assets/bullet.png");
+//    m_bullet.setSpeed(3.0f);
+
     sf::Vector2f pos = getOrigin();
 
     Ray r;
@@ -62,6 +65,10 @@ void Player::update()
     m_laser.setEnd(300, 0);//getPosition());
     m_laser.setColor(sf::Color::Red);
 
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+	//shootBullet();
+    }
 //    ray1.setStart(getOrigin());
 //    ray1.setEnd(getPosition() * 2.0f);
 //    ray1.setRotation(m_fovAngle/2);
@@ -117,8 +124,8 @@ void Player::handleMovement()
 //	std::cout << ray1.getEnd().x << ", " << ray1.getEnd().y << std::endl;
 	m_fovAngle--;
 
-    m_laser.setRotation(m_fovAngle);
-    std::cout << m_laser.getEnd().x << ", " << m_laser.getEnd().y << std::endl;
+//    m_laser.setRotation(m_fovAngle);
+//    std::cout << m_laser.getEnd().x << ", " << m_laser.getEnd().y << std::endl;
 }
 
 void Player::handleRotation()
@@ -128,6 +135,11 @@ void Player::handleRotation()
     float angle = Smath::atan2Angle(mousePos,  getPosition());
 
     setRotation(angle);
+}
+
+void Player::shootBullet()
+{
+//    m_bullet.shoot();
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const

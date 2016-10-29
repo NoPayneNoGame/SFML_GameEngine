@@ -1,7 +1,7 @@
 all: app.out
 
-app.out: main.o player.o smath.o ray.o 
-	g++ -o app.out main.o player.o smath.o ray.o -lsfml-graphics -lsfml-window -lsfml-system	
+app.out: main.o player.o smath.o ray.o bullet.o
+	g++ -o app.out main.o player.o smath.o ray.o bullet.o -lsfml-graphics -lsfml-window -lsfml-system	
 
 main.o: main.cpp
 	g++ -c main.cpp
@@ -15,5 +15,8 @@ smath.o: smath.cpp
 ray.o: ray.cpp
 	g++ -c ray.cpp
 
+bullet.o: bullet.cpp
+	g++ -c bullet.cpp
+
 clean:
-	rm app.out main.o player.o smath.o ray.o .*.swp 
+	rm app.out main.o player.o smath.o ray.o bullet.o .*.swp 

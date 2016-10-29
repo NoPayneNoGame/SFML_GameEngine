@@ -4,6 +4,7 @@
 #include <iostream>
 #include "smath.h"
 #include "ray.h"
+//#include "bullet.h"
 
 class Player : public sf::Drawable, public sf::Transformable
 {
@@ -14,6 +15,8 @@ public:
     void handleMovement();
     void handleRotation();
     void update();
+    void shootBullet();
+
 private:
     virtual void draw(sf::RenderTarget&, sf::RenderStates) const;
     
@@ -23,6 +26,7 @@ private:
     sf::Texture m_texture;
     sf::Sprite m_sprite;
 
+//    Bullet m_bullet;
 
     Ray m_laser;
     Ray ray1;
