@@ -1,7 +1,6 @@
 #include "player.h"
 
-Player::Player(const std::string& texture, int moveSpeed)// :
-//m_shadow(6)
+Player::Player(sf::RenderWindow* window, const std::string& texture, int moveSpeed, Bullet* bullet)
 {
     if(!m_texture.loadFromFile(texture))
         std::cerr << "Player Texture not found." << std::endl;
@@ -12,45 +11,9 @@ Player::Player(const std::string& texture, int moveSpeed)// :
     m_fovAngle = 90;
 
     m_sprite.setOrigin(m_sprite.getLocalBounds().width/2, m_sprite.getLocalBounds().height/2);
-    //m_sprite.setRotation(47);
 
-    m_shadow.setPointCount(3);
-    m_shadow.setFillColor(sf::Color::Green);
-
-//    m_bullet.setTexture("assets/bullet.png");
-//    m_bullet.setSpeed(3.0f);
-
-    sf::Vector2f pos = getOrigin();
-
-    Ray r;
-    r.setStart(0, 0);
-    r.setEnd(300, 0);
-
-
-    m_shadow.setPoint(0, sf::Vector2f(0, 0));
-    m_shadow.setPoint(1, sf::Vector2f(0, -300));
-    m_shadow.setPoint(2, sf::Vector2f(0, 300));
-
-//    r.setRotation(m_fovAngle/2);
-//    m_shadow.setPoint(1, r.getEnd());
-
-//    r.setRotation(m_fovAngle);
-//    m_shadow.setPoint(2, r.getEnd());
-
-//    r.setRotation(m_fovAngle*1.5);
-//    m_shadow.setPoint(3, r.getEnd());
-
-//    r.setRotation(m_fovAngle*2);
-//    m_shadow.setPoint(4, r.getEnd());
-    
-//    m_shadow.setPoint(1, sf::Vector2f(0, 200));
-//    m_shadow.setPoint(2, sf::Vector2f(0, 200));
-//    m_shadow.setPoint(3, sf::Vector2f(200, 200));
-//    m_shadow.setPoint(4, sf::Vector2f(200, 0));
-//    m_shadow.setPoint(5, pos);
-    
-    
-    m_shadow.setPosition(pos);
+    m_bullet = bullet;
+    m_window = window;
 }
 
 Player::~Player(){
@@ -61,45 +24,20 @@ void Player::update()
     handleMovement();
     handleRotation();
 
+    m_bullet->setPosition(getOrigin());
+
     m_laser.setStart(getOrigin());
-    m_laser.setEnd(300, 0);//getPosition());
+    m_laser.setEnd(300, 0);
     m_laser.setColor(sf::Color::Red);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
-	//shootBullet();
+	shootBullet();
     }
-//    ray1.setStart(getOrigin());
-//    ray1.setEnd(getPosition() * 2.0f);
-//    ray1.setRotation(m_fovAngle/2);
-    
-//    ray2.setStart(getOrigin());
-//    ray2.setEnd(getPosition() * 2.0f);
-//    ray2.setRotation(-m_fovAngle/2);
-
- //   updateShadow();
 }
 
 void Player::updateShadow()
 {
-    m_shadow.setPoint(0, getOrigin());
-    m_shadow.setPoint(1, ray1.getEnd());
-    
-    ray1.setRotation(m_fovAngle);
-    m_shadow.setPoint(2, ray1.getEnd());
-
-    ray1.setRotation(m_fovAngle * 1.5);
-    m_shadow.setPoint(3, ray1.getEnd());
-
-    ray1.setRotation(m_fovAngle * 2);
-    m_shadow.setPoint(4, ray1.getEnd());
-
-    ray1.setRotation(m_fovAngle/2);
-//    m_shadow.setPoint(5, getOrigin());
-
-    m_shadow.setPosition(getOrigin());
-
-//    std::cout <<  << std::endl;
 }
 
 void Player::handleMovement()
@@ -114,18 +52,10 @@ void Player::handleMovement()
         move(0, m_moveSpeed);
 
 
-//    std::cout << "Player: " << getPosition().x << ", " << getPosition().y << std::endl;
-//    std::cout << "Mouse: " << sf::Mouse::getPosition().x << ", " << sf::Mouse::getPosition().y << std::endl;
-
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-//	std::cout << ray1.getStart().x << ", " << ray1.getStart().y << std::endl;
 	m_fovAngle++;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-//	std::cout << ray1.getEnd().x << ", " << ray1.getEnd().y << std::endl;
 	m_fovAngle--;
-
-//    m_laser.setRotation(m_fovAngle);
-//    std::cout << m_laser.getEnd().x << ", " << m_laser.getEnd().y << std::endl;
 }
 
 void Player::handleRotation()
@@ -139,7 +69,10 @@ void Player::handleRotation()
 
 void Player::shootBullet()
 {
-//    m_bullet.shoot();
+    std::cout << "Bang!" << std::endl;
+    Bullet* b = new Bullet("assets/bullet.png", 2.0f);
+    b->getSprite().setPosition(getOrigin());
+    m_window->draw(b->getSprite());
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -148,7 +81,10 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
     states.texture = &m_texture;
     target.draw(m_laser, states);
     target.draw(m_sprite, states);
-    target.draw(m_shadow, states);
-    //target.draw(ray1, states);
-    //target.draw(ray2, states);
+    target.draw(*m_bullet, states);
+
+    //for(int i = 0; i < m_bullets.size(); i++)
+    //{
+	//target.draw(*m_bullets[i], states);
+    //}
 }

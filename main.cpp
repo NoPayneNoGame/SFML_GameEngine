@@ -5,8 +5,12 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML");
     
-    Player player("assets/player.png", 1);
+    Bullet bullet("assets/bullet.png", 2.0f);
+    bullet.setPosition(0, 0);
+    
+    Player player(&window, "assets/player.png", 1, &bullet);
     player.setPosition(window.getSize().x/2, window.getSize().y/2);
+
 
     while(window.isOpen()) {
         sf::Event event;
