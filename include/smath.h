@@ -1,3 +1,5 @@
+#ifndef SMATH_H
+#define SMATH_H
 
 #pragma once
 
@@ -16,3 +18,5 @@ public:
     static double slopeOfLine(sf::Vector2f, sf::Vector2f);
     static double atan2Angle(sf::Vector2f, sf::Vector2f);
 };
+
+#endif // SMATH_H

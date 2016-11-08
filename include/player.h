@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -34,3 +37,5 @@ private:
     sf::RenderWindow* m_window;
     sf::ConvexShape m_shadow;
 };
+
+#endif //PLAYER_H

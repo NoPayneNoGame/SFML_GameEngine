@@ -1,3 +1,6 @@
+#ifndef RAY_H
+#define RAY_H
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -26,3 +29,5 @@ private:
     sf::Vector2f m_startPoint;
     sf::VertexArray m_points;
 };
+
+#endif //RAY_H

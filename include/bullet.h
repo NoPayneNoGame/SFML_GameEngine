@@ -1,3 +1,6 @@
+#ifndef BULLET_H
+#define BULLET_H
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -16,3 +19,5 @@ private:
     sf::Sprite m_sprite;
     float m_speed;
 };
+
+#endif // BULLET_H
