@@ -31,5 +31,5 @@ bullet.o: src/bullet.cpp
 	g++ -I include/ -c src/bullet.cpp
 
 clean:
-	rm app.out *.o .*.swp 
+	rm app.out *.o .*.swp vgcore.* 
 
