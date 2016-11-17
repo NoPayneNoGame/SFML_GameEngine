@@ -3,11 +3,14 @@
 
 #pragma once
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
+#include "player.h"
+#include "scenemanager.h"
 
 class Game : sf::NonCopyable
 {
-    static Game* singleton;
+    static Game* m_instance;
 
 public:
     
@@ -23,7 +26,9 @@ public:
 
     bool isRunning() const;
 
-    void quit(sf::Int16 exitCode);
+    void quit(sf::Int16);
+
+    void setFirstScene(Scene*);
 
     sf::Int16 run();
 
@@ -33,6 +38,9 @@ private:
     bool m_running;
     
     sf::Int16 m_exitCode;
+    
+    Scene* m_startScene;
+    SceneManager* m_sceneMan;
 
     Game();
     ~Game();

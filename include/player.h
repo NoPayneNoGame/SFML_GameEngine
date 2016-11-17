@@ -8,12 +8,19 @@
 #include "smath.h"
 #include "ray.h"
 #include "bullet.h"
+#include "game.h"
 
 class Player : public sf::Drawable, public sf::Transformable
 {
 public:
-    Player(sf::RenderWindow*, const std::string&, int, Bullet*);
+    Player();
+    Player(sf::RenderWindow&, const std::string&, int, Bullet*);
     virtual ~Player();
+
+    void setWindow(sf::RenderWindow&);
+    void setTexture(const std::string&);
+    void setSpeed(int);
+
     void updateShadow();
     void handleMovement();
     void handleRotation();
@@ -34,7 +41,7 @@ private:
     Ray ray2;
 
     Bullet* m_bullet;
-    sf::RenderWindow* m_window;
+    sf::RenderWindow& m_window;
     sf::ConvexShape m_shadow;
 };
 

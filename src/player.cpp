@@ -1,6 +1,13 @@
 #include "player.h"
 
-Player::Player(sf::RenderWindow* window, const std::string& texture, int moveSpeed, Bullet* bullet)
+Player::Player() : 
+    m_window(Game::instance()->getWindow())
+{
+    m_fovAngle = 90;
+}
+
+Player::Player(sf::RenderWindow& window, const std::string& texture, int moveSpeed, Bullet* bullet) :
+    m_window(Game::instance()->getWindow())
 {
     if(!m_texture.loadFromFile(texture))
         std::cerr << "Player Texture not found." << std::endl;
@@ -13,10 +20,31 @@ Player::Player(sf::RenderWindow* window, const std::string& texture, int moveSpe
     m_sprite.setOrigin(m_sprite.getLocalBounds().width/2, m_sprite.getLocalBounds().height/2);
 
     m_bullet = bullet;
-    m_window = window;
+    //m_window = window;
 }
 
 Player::~Player(){
+}
+
+void Player::setWindow(sf::RenderWindow& window)
+{
+//    m_window = window;
+}
+
+void Player::setTexture(const std::string& texture)
+{
+    if(!m_texture.loadFromFile(texture))
+        std::cerr << "Player Texture not found." << std::endl;
+
+    std::cout << texture << std::endl;
+
+    m_sprite.setTexture(m_texture, true);
+    m_sprite.setOrigin(m_sprite.getLocalBounds().width/2, m_sprite.getLocalBounds().height/2);
+}
+
+void Player::setSpeed(int moveSpeed)
+{
+    m_moveSpeed = moveSpeed;
 }
 
 void Player::update()
@@ -24,7 +52,7 @@ void Player::update()
     handleMovement();
     handleRotation();
 
-    m_bullet->setPosition(getOrigin());
+    //m_bullet->setPosition(getOrigin());
 
     m_laser.setStart(getOrigin());
     m_laser.setEnd(300, 0);
@@ -53,9 +81,9 @@ void Player::handleMovement()
 
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-	m_fovAngle++;
+	    m_fovAngle++;
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-	m_fovAngle--;
+	    m_fovAngle--;
 }
 
 void Player::handleRotation()
@@ -72,7 +100,7 @@ void Player::shootBullet()
     std::cout << "Bang!" << std::endl;
     Bullet* b = new Bullet("assets/bullet.png", 2.0f);
     b->getSprite().setPosition(getOrigin());
-    m_window->draw(b->getSprite());
+    m_window.draw(b->getSprite());
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -81,7 +109,7 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
     states.texture = &m_texture;
     target.draw(m_laser, states);
     target.draw(m_sprite, states);
-    target.draw(*m_bullet, states);
+    //target.draw(*m_bullet, states);
 
     //for(int i = 0; i < m_bullets.size(); i++)
     //{
