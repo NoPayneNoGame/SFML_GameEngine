@@ -49,7 +49,7 @@ void Ray::setEnd(float x, float y)
 
 void Ray::setColor(sf::Color color)
 {
-    for(int i = 0; i < m_points.getVertexCount(); i++)
+    for(unsigned int i = 0; i < m_points.getVertexCount(); i++)
     {
         m_points[i].color = color;
     }

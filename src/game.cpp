@@ -4,8 +4,8 @@ Game* Game::m_instance = 0;
 
 Game::Game() :
     m_window(),
-    m_exitCode(0),
-    m_running(false)
+    m_running(false),
+    m_exitCode(0)
 {
     std::cout << "Game constructor" << std::endl;
 }
@@ -85,10 +85,6 @@ void Game::createWindow()
     sf::VideoMode videoMode(this->DEF_WIN_WIDTH, this->DEF_WIN_HEIGHT, this->DEF_WIN_BPP);
 
     sf::Int32 style = sf::Style::Default;
-
-    bool fullscreen = false;
-
-    bool resize = true;
 
     bool vsync = true;
 
