@@ -5,7 +5,7 @@ TestScene::TestScene(const std::string& sceneId) :
     m_window(Game::instance()->getWindow()),
     m_sceneMan(SceneManager::instance())
 {
-    this->setBackgroundColour(sf::Color::Red);
+    setBackgroundColour(sf::Color::Red);
 }
 
 TestScene::~TestScene()
@@ -14,10 +14,10 @@ TestScene::~TestScene()
 
 void TestScene::init()
 {
-    //this->m_player.setWindow(this->m_window);
-    this->m_player.setTexture("assets/player.png");
-    this->m_player.setSpeed(1);
-    this->m_player.setPosition(this->m_window.getSize().x/2, this->m_window.getSize().y/2);
+    //m_player.setWindow(m_window);
+    m_player.setTexture("assets/player.png");
+    m_player.setSpeed(1);
+    m_player.setPosition(m_window.getSize().x/2, m_window.getSize().y/2);
 }
 
 void TestScene::activate()
@@ -31,7 +31,7 @@ void TestScene::deactivate()
 
 void TestScene::update()
 {
-    this->m_player.update();
+    m_player.update();
 }
 
 void TestScene::draw()

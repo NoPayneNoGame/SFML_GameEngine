@@ -36,23 +36,23 @@ void Game::release()
 
 sf::RenderWindow& Game::getWindow()
 {
-    return this->m_window;
+    return m_window;
 }
 
 bool Game::isRunning() const
 {
-    return this->m_running;
+    return m_running;
 }
 
 void Game::quit(sf::Int16 exitCode)
 {
-    this->m_exitCode = exitCode;
-    this->m_running = false;
+    m_exitCode = exitCode;
+    m_running = false;
 }
 
 void Game::setFirstScene(Scene* scene)
 {
-    if(this->m_startScene == NULL)
+    if(m_startScene == NULL)
     {
         m_startScene = scene;
         std::cout << m_startScene->getId() << std::endl;
@@ -61,17 +61,17 @@ void Game::setFirstScene(Scene* scene)
 
 sf::Int16 Game::run()
 {
-    this->m_running = true;
+    m_running = true;
 
-    this->createWindow();
+    createWindow();
 
-    this->init();
+    init();
 
-    this->gameLoop();
+    gameLoop();
 
-    this->cleanup();
+    cleanup();
 
-    return this->m_exitCode;
+    return m_exitCode;
 }   
 
 
@@ -82,16 +82,16 @@ void Game::createWindow()
     std::cout << "Create Window" << std::endl;
     
     //Default Window Options
-    sf::VideoMode videoMode(this->DEF_WIN_WIDTH, this->DEF_WIN_HEIGHT, this->DEF_WIN_BPP);
+    sf::VideoMode videoMode(DEF_WIN_WIDTH, DEF_WIN_HEIGHT, DEF_WIN_BPP);
 
     sf::Int32 style = sf::Style::Default;
 
     bool vsync = true;
 
     //Create window
-    this->m_window.create(videoMode, "SFML", style);
+    m_window.create(videoMode, "SFML", style);
 
-    this->m_window.setVerticalSyncEnabled(vsync);
+    m_window.setVerticalSyncEnabled(vsync);
 }
 
 void Game::init()
@@ -100,8 +100,8 @@ void Game::init()
     std::cout << "In game init: " << m_sceneMan << std::endl;
     if(m_startScene != 0)
     {
-        this->m_sceneMan->addScene(this->m_startScene);
-        this->m_sceneMan->changeScene(this->m_startScene->getId());
+        m_sceneMan->addScene(m_startScene);
+        m_sceneMan->changeScene(m_startScene->getId());
     }
     else
     {
@@ -111,10 +111,10 @@ void Game::init()
 
 void Game::gameLoop()
 {
-    while(this->isRunning() && this->m_window.isOpen())
+    while(isRunning() && m_window.isOpen())
     {
         sf::Event event;
-        while(this->m_window.pollEvent(event))
+        while(m_window.pollEvent(event))
         {
             if(event.type == sf::Event::Closed)
                 quit(0);
@@ -123,13 +123,13 @@ void Game::gameLoop()
                     quit(0);
         }
 
-        this->m_sceneMan->updateScene();
+        m_sceneMan->updateScene();
        
-        this->m_window.clear(sf::Color::Blue);
+        m_window.clear(sf::Color::Blue);
         
-        this->m_sceneMan->drawScene();
+        m_sceneMan->drawScene();
 
-        this->m_window.display();
+        m_window.display();
     }
 }
 
