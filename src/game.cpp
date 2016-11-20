@@ -12,12 +12,12 @@ Game::Game() :
 
 Game::~Game()
 {
+    std::cout << "Game deconstructor" << std::endl;
 }
 
 //Public
 Game* Game::instance()
 {
-    std::cout << "Game instance: " << m_instance  << std::endl;
     if(m_instance == 0)
     {
         m_instance = new Game();
@@ -27,6 +27,7 @@ Game* Game::instance()
 
 void Game::release()
 {
+    std::cout << "Game release" << std::endl;
     if(m_instance)
     {
         delete m_instance;
@@ -55,7 +56,6 @@ void Game::setFirstScene(Scene* scene)
     if(m_startScene == NULL)
     {
         m_startScene = scene;
-        std::cout << m_startScene->getId() << std::endl;
     }
 }   
 
@@ -97,7 +97,6 @@ void Game::createWindow()
 void Game::init()
 {
     m_sceneMan = SceneManager::instance();
-    std::cout << "In game init: " << m_sceneMan << std::endl;
     if(m_startScene != 0)
     {
         m_sceneMan->addScene(m_startScene);
@@ -125,7 +124,7 @@ void Game::gameLoop()
 
         m_sceneMan->updateScene();
        
-        m_window.clear(sf::Color::Blue);
+        m_window.clear(m_sceneMan->getActiveScene()->getBackgroundColour());
         
         m_sceneMan->drawScene();
 

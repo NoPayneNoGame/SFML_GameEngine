@@ -5,15 +5,15 @@
 
 int main()
 {
-    std::cout << "Hello" << std::endl;
     int exitCode;
 
     Game* game = Game::instance();
-    std::cout << game << std::endl;
    
     game->setFirstScene(new TestScene("Test"));
 
     exitCode = game->run();
+    
+    std::cout << "Exiting with code: " << exitCode << std::endl;
     
     return exitCode;
 }

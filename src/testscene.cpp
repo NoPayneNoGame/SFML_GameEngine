@@ -5,7 +5,7 @@ TestScene::TestScene(const std::string& sceneId) :
     m_window(Game::instance()->getWindow()),
     m_sceneMan(SceneManager::instance())
 {
-    setBackgroundColour(sf::Color::Red);
+    setBackgroundColour(sf::Color::Blue);
 }
 
 TestScene::~TestScene()
@@ -14,7 +14,6 @@ TestScene::~TestScene()
 
 void TestScene::init()
 {
-    //m_player.setWindow(m_window);
     m_player.setTexture("assets/player.png");
     m_player.setSpeed(1);
     m_player.setPosition(m_window.getSize().x/2, m_window.getSize().y/2);

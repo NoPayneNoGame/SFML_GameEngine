@@ -26,17 +26,10 @@ Player::Player(sf::RenderWindow& window, const std::string& texture, int moveSpe
 Player::~Player(){
 }
 
-void Player::setWindow(sf::RenderWindow& window)
-{
-//    m_window = window;
-}
-
 void Player::setTexture(const std::string& texture)
 {
     if(!m_texture.loadFromFile(texture))
         std::cerr << "Player Texture not found." << std::endl;
-
-    std::cout << texture << std::endl;
 
     m_sprite.setTexture(m_texture, true);
     m_sprite.setOrigin(m_sprite.getLocalBounds().width/2, m_sprite.getLocalBounds().height/2);

@@ -17,7 +17,6 @@ SceneManager::~SceneManager()
 
 SceneManager* SceneManager::instance()
 {
-    std::cout << "Scene Manager Instance: " <<  m_instance << std::endl;
     if(m_instance == 0)
     {
         m_instance = new SceneManager();
@@ -35,16 +34,14 @@ void SceneManager::release()
 
 void SceneManager::addScene(Scene* scene)
 {
-    std::cout << "Adding scene..." << std::endl;
+    std::cout << "Adding scene: " << scene->getId() << std::endl;
     //See if scene already exists in scenes map
-    std::cout << m_scenes.size() << std::endl;
     std::map<std::string, Scene*>::const_iterator it = m_scenes.find(scene->getId());
-
-    std::cout << "After map search" << std::endl;
 
     if(it != m_scenes.end())
     {
         //If it exists, return
+        std::cerr << "Scene " << scene->getId() << "  already exists in scene list." << std::endl;
         return;
     }
 
@@ -53,7 +50,7 @@ void SceneManager::addScene(Scene* scene)
 
     //And init it
     scene->init();
-    std::cout << "Added and Inited scene" << std::endl;
+    std::cout << "Added and inited scene: " << scene->getId() << std::endl;
 }
 
 Scene* SceneManager::getActiveScene()

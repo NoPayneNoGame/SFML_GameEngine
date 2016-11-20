@@ -17,7 +17,6 @@ public:
     Player(sf::RenderWindow&, const std::string&, int, Bullet*);
     virtual ~Player();
 
-    void setWindow(sf::RenderWindow&);
     void setTexture(const std::string&);
     void setSpeed(int);
 
