@@ -1,5 +1,62 @@
 #include "player.h"
 
+Player::Player()
+{
+}
+
+Player::~Player()
+{
+}
+
+void Player::init()
+{
+    setIsMoveable(true);
+    setIsCollideable(true);
+    setIsPlayerControlled(true);
+}
+
+void Player::update()
+{
+    handleMovement();
+    handleRotation();
+
+}
+
+void Player::draw()
+{
+    m_window.draw(m_sprite);
+}
+
+void Player::handleMovement()
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        move(-m_moveSpeed, 0);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        move(m_moveSpeed, 0);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        move(0, -m_moveSpeed);
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        move(0, m_moveSpeed);
+}
+
+void Player::handleRotation()
+{
+    sf::Vector2f mousePos(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
+
+    float angle = Smath::atan2Angle(mousePos,  getPosition());
+
+    setRotation(angle);
+}
+
+
+void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    states.transform *= getTransform();
+    states.texture = &m_texture;
+    target.draw(m_sprite, states);
+}
+
+/*
 Player::Player() : 
     m_window(Game::instance()->getWindow())
 {
@@ -63,14 +120,14 @@ void Player::updateShadow()
 
 void Player::handleMovement()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        move(-m_moveSpeed, 0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        move(m_moveSpeed, 0);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        move(0, -m_moveSpeed);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        move(0, m_moveSpeed);
+    if(sf::keyboard::iskeypressed(sf::keyboard::a))
+        move(-m_movespeed, 0);
+    if(sf::keyboard::iskeypressed(sf::keyboard::d))
+        move(m_movespeed, 0);
+    if(sf::keyboard::iskeypressed(sf::keyboard::w))
+        move(0, -m_movespeed);
+    if(sf::keyboard::iskeypressed(sf::keyboard::s))
+        move(0, m_movespeed);
 
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
@@ -108,4 +165,4 @@ void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const
     //{
 	//target.draw(*m_bullets[i], states);
     //}
-}
+}*/

@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "player.h"
 #include "scenemanager.h"
 
 class Game : sf::NonCopyable
