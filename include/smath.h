@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include <math.h>
 
+/// Custom math class for handling 2D space.
 class Smath
 {
 public:
